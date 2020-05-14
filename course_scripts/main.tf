@@ -340,16 +340,18 @@ resource "random_id" "wp_code_bucket" {
 }
 
 resource "aws_s3_bucket" "code" {
-  bucket        = "${var.domain_name}-${random_id.wp_code_bucket.dec}"
+  bucket        = "${var.domain_name}_${random_id.wp_code_bucket.dec}"
+  # or bucket        = "${var.domain_name}-${random_id.wp_code_bucket.dec}"
+  
   acl           = "private"
-  force_destroy = true
+  force_destroy = "true"
 
-  tags {
+  tags = {
     Name = "code bucket"
   }
 }
 
-#---------compute-----------
+#---------RDS compute-----------
 
 resource "aws_db_instance" "wp_db" {
   allocated_storage      = 10
