@@ -64,7 +64,7 @@ resource "aws_vpc" "wp_vpc" {
   }
 }
 
-#internet gateway
+#-----------internet gateway
 
 resource "aws_internet_gateway" "wp_internet_gateway" {
   vpc_id = "${aws_vpc.wp_vpc.id}"
@@ -74,7 +74,7 @@ resource "aws_internet_gateway" "wp_internet_gateway" {
   }
 }
 
-# Route tables
+#------------ Route tables
 
 resource "aws_route_table" "wp_public_rt" {
   vpc_id = "${aws_vpc.wp_vpc.id}"
@@ -141,7 +141,7 @@ resource "aws_subnet" "wp_private2_subnet" {
   }
 }
 
-#create S3 VPC endpoint
+#------------create S3 VPC endpoint
 resource "aws_vpc_endpoint" "wp_private-s3_endpoint" {
   vpc_id       = "${aws_vpc.wp_vpc.id}"
   service_name = "com.amazonaws.${var.aws_region}.s3"
@@ -197,7 +197,7 @@ resource "aws_subnet" "wp_rds3_subnet" {
   }
 }
 
-# Subnet Associations
+# -----------Subnet Associations
 
 resource "aws_route_table_association" "wp_public_assoc" {
   subnet_id      = "${aws_subnet.wp_public1_subnet.id}"
